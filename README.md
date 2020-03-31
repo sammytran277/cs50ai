@@ -1,2 +1,3 @@
-# cs50ai
-Project solutions and notes from CS50's introduction to artificial intelligence with Python
+# **HarvardX - CS50's Introduction to Artificial Intelligence with Python**
+
+TBD
