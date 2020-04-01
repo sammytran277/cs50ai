@@ -1,3 +1,7 @@
+# Command-line program that takes a file containing a maze representation
+# and finds the shortest path from the starting point to the endpoint,
+# if it exists
+
 class Node:
     def __init__(self, state, parent, action):
         self.state = state
@@ -51,7 +55,9 @@ class Maze:
         self.parseMazeFile()
 
     def parseMazeFile(self):
-        """Parses maze file, sets maze layout and finds start and endpoint of the maze"""
+        """
+        Parses maze file, sets maze layout and finds start and endpoint of the maze
+        """
         
         with open(self.mazeFile) as f:
             for row in f:
@@ -68,7 +74,9 @@ class Maze:
         self.mazeWidth = len(self.mazeLayout[0])
 
     def printShortestPath(self):
-        """Prints the shortest path from start to end"""
+        """
+        Prints the shortest path from start to end
+        """
 
         assert self.shortestPath != None
 
@@ -81,7 +89,9 @@ class Maze:
             print()
 
     def getShortestPath(self):
-        """Find the shortest path from start to end"""
+        """
+        Find the shortest path from start to end
+        """
 
         start = Node(state=self.startState, parent=None, action=None)
         frontier = QueueFrontier()
@@ -121,7 +131,10 @@ class Maze:
                     frontier.push(newChild)
 
     def getValidDirections(self, node):
-        """Return a list of node states representing valid neighbors"""
+        """
+        Return a list of node states representing valid neighbors
+        """
+
         up, down = (-1, 0), (1, 0)
         left, right = (0, -1), (0, 1)
         directions = [up, down, left, right]
