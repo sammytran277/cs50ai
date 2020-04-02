@@ -3,6 +3,7 @@ Tic Tac Toe Player
 """
 
 import math
+import copy
 
 X = "X"
 O = "O"
@@ -62,12 +63,13 @@ def result(board, action):
     """
     Returns the board that results from making move (i, j) on the board.
     """
-    # We'll return the resulting board by first making a copy of the board, then
+    # We'll return the resulting board by first making a deep copy of the board, then
     # checking that the square is not already occupied
-    newBoard = board[:]
+    newBoard = copy.deepcopy(board)
     
     # Check validity of action
     if newBoard[action[0]][action[1]] != EMPTY:
+        print("Tried to play {}".format(action))
         raise UserWarning("Invalid move")
     else:
         newBoard[action[0]][action[1]] = player(board)
@@ -148,9 +150,59 @@ def utility(board):
         return 0
 
 
+def maxValue(state):
+    """
+    Return the highest possible value that could come out of a given board state
+    """
+    # Maximizing function based on the lecture's pseudocode
+    if terminal(state):
+        return utility(state)
+    v = float("-inf")
+    for action in actions(state):
+        v = max(v, minValue(result(state, action)))
+    return v
+
+
+def minValue(state):
+    """
+    Return the lowest possible value that could come out of a given board state
+    """
+    # Minimizing function based on the lecture's pseudocode
+    if terminal(state):
+        return utility(state)
+    v = float("inf")
+    for action in actions(state):
+        v = min(v, maxValue(result(state, action)))
+    return v
+
+
 def minimax(board):
     """
     Returns the optimal action for the current player on the board.
     """
-    
-    raise NotImplementedError
+    # To implement minimax, we're going to get all the possible moves in a given
+    # board and see what results from the position when the opponent plays optimally.
+    # Out of all the possibilities, the one with the biggest value is chosen as the
+    # optimal move to play
+    currentPlayer = player(board)
+    if currentPlayer == "X":
+        # Optimization for when the computer is playing "X" and it is the first move
+        if (board == initial_state()):
+            return (0, 1)
+        v = float("-inf")
+        optimalAction = None
+        for action in actions(board):
+            valueOfAction = minValue(result(board, action))
+            if valueOfAction > v:
+                v = valueOfAction
+                optimalAction = action
+        return optimalAction
+    else:
+        v = float("inf")
+        optimalAction = None
+        for action in actions(board):
+            valueOfAction = maxValue(result(board, action))
+            if valueOfAction < v:
+                v = valueOfAction
+                optimalAction = action
+        return optimalAction
