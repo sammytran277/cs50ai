@@ -94,6 +94,7 @@ def checkWin(board, win):
     else:
         return None
 
+
 def winner(board):
     """
     Returns the winner of the game, if there is one.
@@ -106,9 +107,9 @@ def winner(board):
             [(0, 0), (1, 1), (2, 2)], [(0, 2), (1, 1), (2, 0)]]
 
     for win in wins:
-         result = checkWin(board, win)
-         if result != None:
-             return result
+        result = checkWin(board, win)
+        if result != None:
+            return result
     
     return None
 
