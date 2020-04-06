@@ -1,3 +1,6 @@
+# Project 0b: Tic Tac Toe
+# Implement the minimax algorithm to play perfect tic tac toe
+
 """
 Tic Tac Toe Player
 """
