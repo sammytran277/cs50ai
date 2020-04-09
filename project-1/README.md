@@ -12,5 +12,5 @@ In knights, we are asked to develop the knowledge bases necessary to solve the 4
 
 ### **Minesweeper**
 
-TBD
+In minesweeper, we build an AI that is capable of playing minesweeper well (not perfectly however, because sometimes, you just have to pick a random move). To do so, we use the power of propositional logic to infer which squares on the board must be mines, and which squares on the board are guaranteed to be safe. As the AI makes more safe moves, it adds more information to its knowledge base by combining new information with what it already knows. For instance, if the AI already knows that there must be 2 mines in the set {A, B, C} (where A, B, and C are the coordinates of cells on the board) and later on, it learns that C is safe (perhaps by clicking on C), then it can infer that there must be 2 mines in {A, B}, and since the number of mines matches the length of the set, A and B are both cells that contain a mine. From my testing, the AI I have built seems to run fairly quickly and performed well on boards of varying sizes.
 
